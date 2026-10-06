@@ -22,12 +22,12 @@ function register({ email, password, name } = {}) {
   return publicUser(user);
 }
 
-function login({ email, password } = {}) {
+function login({ email, password, rememberMe } = {}) {
   const user = db.users.find((u) => u.email === email);
   if (!user || user.passwordHash !== hashPassword(password || '')) {
     throw new HttpError(401, 'Invalid credentials');
   }
-  return { token: token.sign({ sub: user.id }), user: publicUser(user) };
+  return { token: token.sign({ sub: user.id }, { remember: rememberMe === true }), user: publicUser(user) };
 }
 
 function authenticate(req) {
