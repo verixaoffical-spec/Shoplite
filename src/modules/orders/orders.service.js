@@ -2,11 +2,14 @@ const db = require('../../data/db');
 const { HttpError } = require('../../core/http');
 const cart = require('../cart/cart.service');
 const { calculateTotals } = require('../pricing/pricing.service');
+const { findCoupon } = require('../coupons/coupons.service');
 
-function checkout(userId) {
+function checkout(userId, couponCode) {
   const items = cart.getCartItems(userId);
   if (items.length === 0) throw new HttpError(400, 'Cart is empty');
-  const totals = calculateTotals(items);
+  const coupon = couponCode ? findCoupon(couponCode) : null;
+  if (couponCode && !coupon) throw new HttpError(400, 'Invalid coupon');
+  const totals = calculateTotals(items, coupon);
   const order = {
     id: db.nextOrderId++,
     userId,
