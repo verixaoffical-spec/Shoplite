@@ -2,9 +2,9 @@ const orders = require('./orders.service');
 const auth = require('../auth/auth.service');
 
 function register(router) {
-  router.add('POST', '/api/orders', ({ req }) => {
+  router.add('POST', '/api/orders', ({ req, body }) => {
     const user = auth.authenticate(req);
-    return { status: 201, body: orders.checkout(user.id) };
+    return { status: 201, body: orders.checkout(user.id, body.couponCode) };
   });
   router.add('GET', '/api/orders', ({ req }) => {
     const user = auth.authenticate(req);
