@@ -28,7 +28,7 @@ function getCart(userId) {
 
 function addItem(userId, { productId, quantity } = {}) {
   const product = products.get(productId);
-  if (!Number.isInteger(quantity) || quantity < 1) throw new HttpError(400, 'Quantity must be a whole number of at least 1');
+  if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) throw new HttpError(400, 'Quantity must be a whole number of at least 1');
   const cart = rawCart(userId);
   const existing = cart.find((entry) => entry.productId === product.id);
   const newQuantity = (existing ? existing.quantity : 0) + quantity;
