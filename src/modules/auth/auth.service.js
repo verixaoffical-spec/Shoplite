@@ -8,7 +8,8 @@ function publicUser(user) {
 }
 
 function register({ email, password, name } = {}) {
-  if (!email || !email.includes('@')) throw new HttpError(400, 'A valid email is required');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) throw new HttpError(400, 'A valid email is required');
+  email = email.trim().toLowerCase();
   if (!password || password.length < 8) throw new HttpError(400, 'Password must be at least 8 characters');
   if (db.users.find((u) => u.email === email)) throw new HttpError(409, 'Email already registered');
   const user = {
