@@ -52,4 +52,4 @@ All prices are integer cents.
 
     npm test            # unit and API tests, no install needed
     npm run test:api    # Newman collection, server must be running
-    npm run test:e2e    # Playwright, needs npm install first
+    npm run test:e2e    # Playwright, needs npm install firstfgjhgjhgjhkgk
