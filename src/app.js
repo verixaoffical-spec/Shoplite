@@ -4,11 +4,7 @@ const path = require('path');
 const { Router } = require('./core/router');
 const { sendJson } = require('./core/http');
 
-const router = new Router();
-require('./modules/auth/auth.routes').register(router);
-require('./modules/products/products.routes').register(router);
-require('./modules/cart/cart.routes').register(router);
-require('./modules/orders/orders.routes').register(router);
+
 
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };
