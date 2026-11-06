@@ -1,4 +1,4 @@
-# ShopLite
+# ShopLite-v2
 
 ShopLite is a tiny shop backend used to demonstrate automated quality engineering. It lets customers register, browse products, fill a cart and recieve an order.
 
